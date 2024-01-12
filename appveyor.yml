@@ -1,13 +1,13 @@
 version: 4.9.0.{build}
-image: Visual Studio 2017
-configuration: Release
+image: Visual Studio 2019
+configuration: Debug
 assembly_info:
   patch: true
   file: '**\AssemblyInfo.*'
   assembly_version: '{version}'
   assembly_file_version: '{version}'
   assembly_informational_version: '{version}'
-build_script:
+# build_script:
 - cmd: >-
     nuget restore    
 
@@ -16,13 +16,17 @@ build_script:
     powershell "".\generateWixGuid.ps1""
 
     msbuild WixInstaller\WixInstaller.wixproj /t:Rebuild
-test: off
+test: on
 artifacts:
+- path: path_to_necessary_files
+  name: NecessaryFiles
+- path: another_path_to_files
+  name: AnotherFiles
 - path: Deployment\
   name: Binaries
 - path: Installer\SecondMonitor.msi
   name: Installer
-deploy:
+
 - provider: GitHub
   on:
     appveyor_repo_tag: true
