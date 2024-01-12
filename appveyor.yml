@@ -28,8 +28,8 @@ deploy:
     appveyor_repo_tag: true
   description: Relese Description
   tag: $(APPVEYOR_REPO_TAG_NAME)
-  auth_token:
-    secure: yhQt+R9aeo+1MaDJS5cRZnA8ZGMjlSpTu/y4U2Ity99tDyl3oqE846uvWFx5xndm
+    auth_token:
+    secure: <new_secure_token>
   artifact: Installer
   draft: true
   
