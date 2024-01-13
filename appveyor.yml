@@ -1,7 +1,12 @@
-version: 4.9.0.{build}
-image: Visual Studio 2017
+version: 4.9.0
+image: Visual Studio 2019
 configuration: Release
 assembly_info:
+  patch: true
+  file: '**\AssemblyInfo.*'
+  assembly_version: '4.9.0'
+  assembly_file_version: '4.9.0'
+  assembly_informational_version: '4.9.0'
   patch: true
   file: '**\AssemblyInfo.*'
   assembly_version: '{version}'
@@ -16,10 +21,12 @@ build_script:
     powershell "".\generateWixGuid.ps1""
 
     msbuild WixInstaller\WixInstaller.wixproj /t:Rebuild
-test: off
+test: on
+  script:
+  - run: dotnet test
 artifacts:
-- path: Deployment\
-  name: Binaries
+- path: Binaries\
+  name: Binaries - path: Installer\n  name: Installer
 - path: Installer\SecondMonitor.msi
   name: Installer
 deploy:
